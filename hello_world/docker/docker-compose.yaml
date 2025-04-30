@@ -1,0 +1,38 @@
+services:
+  html-server:
+    image: html-server
+    container_name: html-server
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+        USER_NAME: ${USER_NAME}
+    # Hardware settings
+    networks:
+      my-network:
+        ipv4_address: 192.168.16.2
+    # OS settings
+    hostname: server
+    user: "${UID}:${GID}"
+    working_dir: /home/${USER_NAME}
+    privileged: true
+    tty: true
+    volumes:
+      # For GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      # For development
+      - ../:/home/${USER_NAME}/${PACKAGE_NAME}
+    environment:
+      # For GUI
+      DISPLAY: 
+      QT_X11_NO_MITSHM: 1
+      # Application settings
+
+    command: /bin/bash
+networks:
+  my-network:
+    ipam:
+      config:
+        - subnet: 192.168.16.0/24
