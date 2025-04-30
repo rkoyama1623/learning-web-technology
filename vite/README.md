@@ -1,6 +1,6 @@
 # vite
 
-## Log in to docer container
+## Log in to docker container
 
 ```bash
 docker compose exec html-server /bin/bash

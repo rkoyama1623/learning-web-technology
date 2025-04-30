@@ -1,6 +1,6 @@
 # reverse-proxy
 
-## Log in to docer container
+## Log in to docker container
 
 ```bash
 cd reverse-proxy/docker
